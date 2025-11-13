@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>许瑞 | 医学影像学个人主页</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    
+    <!-- Tailwind配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36BFFA',
+                        accent: '#7B61FF',
+                        dark: '#1D2939',
+                        light: '#F9FAFB'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Georgia', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .transition-custom {
+                transition: all 0.3s ease;
+            }
+            .card-hover {
+                @apply hover:shadow-lg hover:-translate-y-1 transition-all duration-300;
+            }
+        }
+    </style>
+</head>
+<body class="bg-light text-dark antialiased">
+    <!-- 导航栏 -->
+    <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/90 backdrop-blur-sm shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#home" class="text-xl font-bold text-primary flex items-center gap-2">
+                <i class="fa fa-heartbeat"></i>
+                <span>许瑞 | 医学影像学</span>
+            </a>
+            
+            <!-- 桌面端导航 -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="nav-link hover:text-primary transition-custom">首页</a>
+                <a href="#about" class="nav-link hover:text-primary transition-custom">个人简介</a>
+                <a href="#education" class="nav-link hover:text-primary transition-custom">教育背景</a>
+                <a href="#awards" class="nav-link hover:text-primary transition-custom">荣誉奖项</a>
+                <a href="#knowledge-graph" class="nav-link hover:text-primary transition-custom">MRI知识图谱</a>
+                <a href="#contact" class="nav-link hover:text-primary transition-custom">联系方式</a>
+            </nav>
+            
+            <!-- 移动端菜单按钮 -->
+            <button id="mobile-menu-button" class="md:hidden text-dark focus:outline-none">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+        </div>
+        
+        <!-- 移动端导航 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#home" class="py-2 hover:text-primary transition-custom">首页</a>
+                <a href="#about" class="py-2 hover:text-primary transition-custom">个人简介</a>
+                <a href="#education" class="py-2 hover:text-primary transition-custom">教育背景</a>
+                <a href="#awards" class="py-2 hover:text-primary transition-custom">荣誉奖项</a>
+                <a href="#knowledge-graph" class="py-2 hover:text-primary transition-custom">MRI知识图谱</a>
+                <a href="#contact" class="py-2 hover:text-primary transition-custom">联系方式</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 英雄区 -->
+        <section id="home" class="pt-28 pb-16 md:pt-36 md:pb-24 bg-gradient-to-b from-primary/5 to-white">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-center gap-10">
+                    <div class="w-full md:w-1/2 space-y-6">
+                        <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight text-dark">
+                            医学影像学 | 影像技术与科研实践
+                        </h1>
+                        <ul class="text-lg text-gray-600 max-w-lg space-y-2">
+                            <li class="flex items-start gap-2">
+                                <i class="fa fa-check text-primary mt-1"></i>
+                                <span>天津医科大学 医学影像学本科在读</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa fa-check text-primary mt-1"></i>
+                                <span>电话：15055918616</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa fa-check text-primary mt-1"></i>
+                                <span>邮箱：xurui_2022082114@163.com</span>
+                            </li>
+                        </ul>
+                        <div class="flex flex-wrap gap-4 pt-4">
+                            <a href="#awards" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-custom shadow-md hover:shadow-lg">
+                                查看荣誉奖项
+                            </a>
+                            <a href="#knowledge-graph" class="px-6 py-3 border border-primary text-primary rounded-lg hover:bg-primary/5 transition-custom">
+                                MRI知识图谱
+                            </a>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 flex justify-center">
+                        <div class="relative">
+                            <div class="absolute -inset-4 bg-primary/20 rounded-full blur-2xl opacity-70"></div>
+                            <!-- 替换为你的照片 -->
+                            <img src="https://github.com/RayXu-MedImage/RayXu-MedImage.github.io/raw/10445ffc4ab3c1e80f23ee8743f4bcb725f2e0ca/3486fda6a35d0d708fb83cc9f33abac5.jpg" alt="许瑞" class="relative w-64 h-64 md:w-80 md:h-80 object-cover rounded-full border-4 border-white shadow-xl">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 个人简介 -->
+        <section id="about" class="py-16 md:py-24">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4">个人简介</h2>
+                    <div class="w-20 h-1 bg-primary mx-auto"></div>
+                </div>
+                
+                <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-md p-8 md:p-10">
+                    <div class="space-y-6">
+                        <p class="text-lg">
+                            许瑞，2004年12月出生，安徽淮南人，共青团员，天津医科大学医学影像学专业本科在读。
+                        </p>
+                        <p class="text-lg">
+                            在校期间学业成绩优异，掌握医学影像学核心课程，同时参与医学影像技术等领域科研竞赛与创新项目，具备扎实的专业基础与跨领域实践能力。
+                        </p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+                            <div class="bg-primary/5 p-6 rounded-xl card-hover">
+                                <div class="text-primary text-3xl mb-4">
+                                    <i class="fa fa-book"></i>
+                                </div>
+                                <h3 class="font-bold text-lg mb-2">专业方向</h3>
+                                <p>医学影像诊断</p>
+                            </div>
+                            
+                            <div class="bg-primary/5 p-6 rounded-xl card-hover">
+                                <div class="text-primary text-3xl mb-4">
+                                    <i class="fa fa-flask"></i>
+                                </div>
+                                <h3 class="font-bold text-lg mb-2">研究兴趣</h3>
+                                <!-- 去掉了前缀 -->
+                                <p>多模态影像技术及临床转化</p>
+                                <p>深度学习在医学影像中的应用</p>
+                                <p>影像组学与定量分析</p>
+                            </div>
+                            
+                            <div class="bg-primary/5 p-6 rounded-xl card-hover">
+                                <div class="text-primary text-3xl mb-4">
+                                    <i class="fa fa-trophy"></i>
+                                </div>
+                                <h3 class="font-bold text-lg mb-2">核心能力</h3>
+                                <p>专业知识扎实</p>
+                                <p>科研创新思维</p>
+                                <p>英语能力</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 教育背景 -->
+        <section id="education" class="py-16 md:py-24 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4">教育背景</h2>
+                    <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                    <p class="text-gray-600 max-w-2xl mx-auto text-lg">
+                        天津医科大学是国家"双一流"建设高校，以医学为特色，拥有雄厚的医学教育和科研实力。
+                    </p>
+                </div>
+                
+                <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-md p-8 md:p-10">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                            <i class="fa fa-graduation-cap text-primary"></i>
+                            <span>就读院校</span>
+                        </h3>
+                        <div class="flex items-center gap-4">
+                            <div class="bg-primary/10 p-4 rounded-lg">
+                                <i class="fa fa-university text-3xl text-primary"></i>
+                            </div>
+                            <div>
+                                <p class="text-xl font-semibold">天津医科大学</p>
+                                <p class="text-gray-600">医学影像学专业 | 本科在读 | 2022年8月至今</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 荣誉奖项 -->
+        <section id="awards" class="py-16 md:py-24">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4">荣誉奖项与竞赛成果</h2>
+                    <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                    <p class="text-gray-600 max-w-2xl mx-auto text-lg">
+                        积极参与学术竞赛与创新项目，不断提升综合能力
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <!-- 荣誉证书 -->
+                    <div class="bg-white rounded-xl shadow-md p-8 card-hover">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="bg-primary/10 p-3 rounded-full text-primary">
+                                <i class="fa fa-certificate text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">荣誉证书</h3>
+                        </div>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3">
+                                <i class="fa fa-check-circle text-primary mt-1"></i>
+                                <span>2022-2023学年校级一等奖学金</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa fa-check-circle text-primary mt-1"></i>
+                                <span>2024-2025学年校级三等奖学金</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa fa-check-circle text-primary mt-1"></i>
+                                <span>天津市大学生数学竞赛二等奖</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- 竞赛成果 -->
+                    <div class="bg-white rounded-xl shadow-md p-8 card-hover">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="bg-primary/10 p-3 rounded-full text-primary">
+                                <i class="fa fa-trophy text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">竞赛成果</h3>
+                        </div>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3">
+                                <i class="fa fa-medal text-primary mt-1"></i>
+                                <div>
+                                    <p class="font-medium">第七届中国大学生5分钟科研英语演讲大赛 天津赛区三等奖</p>
+                                    <p class="text-gray-600 text-sm">项目：《精神分裂症与认知能力之间的基因重叠》</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa fa-medal text-primary mt-1"></i>
+                                <div>
+                                    <p class="font-medium">中国国际大学生创新大赛 校级铜奖（3项）</p>
+                                    <p class="text-gray-600 text-sm">1. 维森——卵清白蛋白交联纳米疫苗研发有限公司（四作）</p>
+                                    <p class="text-gray-600 text-sm">2. 科学减脂，健康新生——2025做自己的健康CEO（二作）</p>
+                                    <p class="text-gray-600 text-sm">3. 解码科学体重管理，共筑健康中国新篇章（三作）</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MRI知识图谱 -->
+        <section id="knowledge-graph" class="py-16 md:py-24 bg-gradient-to-b from-white to-primary/5">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4">MRI知识图谱</h2>
+                    <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                    <p class="text-gray-600 max-w-3xl mx-auto text-lg">
+                        涵盖MRI原理、结构、设备及临床应用，点击节点探索相关概念与应用
+                    </p>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="p-6 border-b">
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <div class="flex-1">
+                                <label for="search-node" class="block text-sm font-medium text-gray-700 mb-1">搜索MRI概念</label>
+                                <div class="relative">
+                                    <input type="text" id="search-node" placeholder="例如：核磁共振、T1加权、梯度线圈..." 
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary">
+                                    <button id="search-btn" class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-primary">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-auto">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">筛选MRI类别</label>
+                                <select id="category-filter" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary">
+                                    <option value="all">全部类别</option>
+                                    <option value="principle">基本原理</option>
+                                    <option value="sequence">成像序列</option>
+                                    <option value="equipment">设备结构</option>
+                                    <option value="application">临床应用</option>
+                                    <option value="safety">安全防护</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col lg:flex-row">
+                        <!-- 图谱可视化 -->
+                        <div class="w-full lg:w-2/3 h-[600px] bg-gray-50" id="graph-container">
+                            <!-- D3.js将在此渲染图谱 -->
+                        </div>
+                        
+                        <!-- 节点详情面板 -->
+                        <div class="w-full lg:w-1/3 border-l p-6 bg-gray-50" id="node-details">
+                            <div class="h-full flex flex-col justify-center items-center text-center text-gray-500">
+                                <i class="fa fa-info-circle text-5xl mb-4 opacity-30"></i>
+                                <p>点击图谱中的节点查看详细信息</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 联系方式 -->
+        <section id="contact" class="py-16 md:py-24">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4">联系方式</h2>
+                    <div class="w-20 h-1 bg-primary mx-auto mb-6"></div>
+                    <p class="text-gray-600 max-w-2xl mx-auto text-lg">
+                        欢迎交流学习，共同探讨医学影像学相关话题
+                    </p>
+                </div>
+                
+                <div class="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-md">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="bg-primary/10 p-3 rounded-lg text-primary">
+                                    <i class="fa fa-phone text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">电话</h4>
+                                    <p class="text-gray-600">15055918616</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="bg-primary/10 p-3 rounded-lg text-primary">
+                                    <i class="fa fa-envelope text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">邮箱</h4>
+                                    <p class="text-gray-600">xurui_2022082114@163.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="bg-primary/10 p-3 rounded-lg text-primary">
+                                    <i class="fa fa-map-marker text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">籍贯</h4>
+                                    <p class="text-gray-600">安徽淮南</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4">
+                                <div class="bg-primary/10 p-3 rounded-lg text-primary">
+                                    <i class="fa fa-university text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">就读院校</h4>
+                                    <p class="text-gray-600">天津医科大学</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-center">
+                            <div class="bg-primary/5 p-8 rounded-xl text-center">
+                                <i class="fa fa-handshake-o text-5xl text-primary mb-4"></i>
+                                <h3 class="text-xl font-bold mb-2">期待交流</h3>
+                                <p class="text-gray-600">
+                                    无论是专业学习、科研项目还是学术交流，都欢迎随时联系
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fa fa-heartbeat"></i>
+                        <span>许瑞 | 医学影像学</span>
+                    </h3>
+                    <p class="text-gray-400 mb-6">
+                        天津医科大学本科在读，专注MRI影像技术研究与临床应用。
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-custom">
+                            <i class="fa fa-weixin"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-custom">
+                            <i class="fa fa-qq"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-custom">
+                            <i class="fa fa-github"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-custom">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">快速导航</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition-custom">首页</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-custom">个人简介</a></li>
+                        <li><a href="#education" class="text-gray-400 hover:text-white transition-custom">教育背景</a></li>
+                        <li><a href="#awards" class="text-gray-400 hover:text-white transition-custom">荣誉奖项</a></li>
+                        <li><a href="#knowledge-graph" class="text-gray-400 hover:text-white transition-custom">MRI知识图谱</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-custom">联系方式</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">MRI核心内容</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-custom">MRI基本原理</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-custom">成像序列技术</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-custom">设备结构组成</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-custom">临床应用领域</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-custom">安全防护措施</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-custom">质量控制方法</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-10 pt-6 text-center text-gray-500">
+                <p>&copy; 2024 许瑞. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 bg-primary text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-primary/90">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // 移动端菜单切换
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-md');
+                navbar.classList.remove('shadow-sm');
+            } else {
+                navbar.classList.remove('shadow-md');
+                navbar.classList.add('shadow-sm');
+            }
+        });
+        
+        // 锚点平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // 关闭移动端菜单
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // 返回顶部按钮
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.add('opacity-0', 'invisible');
+                backToTopButton.classList.remove('opacity-100', 'visible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // MRI知识图谱实现（D3.js）
+        document.addEventListener('DOMContentLoaded', function() {
+            // MRI知识图谱数据
+            const graphData = {
+                nodes: [
+                    // 基本原理
+                    { id: 1, name: "核磁共振原理", group: 1, category: "principle", 
+                      description: "MRI基于核磁共振现象，通过强磁场使人体组织中的氢质子定向排列，射频脉冲激发后产生共振信号，经计算机处理形成图像。" },
+                    { id: 2, name: "弛豫时间", group: 1, category: "principle",
+                      description: "弛豫时间是指射频脉冲关闭后，质子从激发状态恢复到平衡状态的时间，包括T1弛豫和T2弛豫，是MRI成像的基础。" },
+                    { id: 3, name: "进动频率", group: 1, category: "principle",
+                      description: "在磁场中，质子绕主磁场方向做锥形旋转运动称为进动，其频率遵循拉莫尔方程，与磁场强度成正比。" },
+                    { id: 4, name: "信号产生机制", group: 1, category: "principle",
+                      description: "当射频脉冲频率与质子进动频率一致时，质子吸收能量发生共振，脉冲关闭后质子释放能量产生MR信号，被接收线圈检测。" },
+                    
+                    // 成像序列
+                    { id: 5, name: "T1加权成像", group: 2, category: "sequence",
+                      description: "T1加权成像突出组织的T1弛豫时间差异，液体呈低信号（黑色），脂肪呈高信号（白色），对解剖结构显示清晰。" },
+                    { id: 6, name: "T2加权成像", group: 2, category: "sequence",
+                      description: "T2加权成像突出组织的T2弛豫时间差异，液体呈高信号（白色），对水肿、炎症等病变敏感，常用于病变定性。" },
+                    { id: 7, name: "FLAIR序列", group: 2, category: "sequence",
+                      description: "液体衰减反转恢复序列（FLAIR）可抑制脑脊液信号，清晰显示脑室周围病变，常用于脑部炎症和脱髓鞘疾病诊断。" },
+                    { id: 8, name: "DWI扩散加权", group: 2, category: "sequence",
+                      description: "扩散加权成像（DWI）反映水分子扩散运动，对急性脑梗死极为敏感，可在发病数小时内显示病变。" },
+                    { id: 9, name: "增强扫描", group: 2, category: "sequence",
+                      description: "通过静脉注射含钆造影剂，缩短组织T1弛豫时间，使病变组织与正常组织形成对比，提高病变检出率。" },
+                    
+                    // 设备结构
+                    { id: 10, name: "主磁体", group: 3, category: "equipment",
+                      description: "主磁体产生强而均匀的静磁场，是MRI设备的核心部件，场强通常为1.5T或3.0T，场强越高图像质量越好。" },
+                    { id: 11, name: "梯度线圈", group: 3, category: "equipment",
+                      description: "梯度线圈产生梯度磁场，用于空间定位编码，包括x、y、z三个方向，决定图像的分辨率和扫描速度。" },
+                    { id: 12, name: "射频线圈", group: 3, category: "equipment",
+                      description: "射频线圈负责发射射频脉冲和接收MR信号，有体线圈和表面线圈之分，表面线圈可提高局部组织的信号质量。" },
+                    { id: 13, name: "谱仪系统", group: 3, category: "equipment",
+                      description: "谱仪系统控制射频脉冲发射、梯度场切换和信号接收，是MRI设备的电子控制核心，决定成像序列的实现。" },
+                    { id: 14, name: "计算机系统", group: 3, category: "equipment",
+                      description: "负责数据采集、图像处理、图像重建和显示，高性能计算机可加快成像速度和提高图像质量。" },
+                    
+                    // 临床应用
+                    { id: 15, name: "脑部MRI", group: 4, category: "application",
+                      description: "脑部MRI是诊断脑肿瘤、脑血管疾病、脱髓鞘疾病等的重要手段，无辐射且软组织分辨率高，能清晰显示脑部细微结构。" },
+                    { id: 16, name: "脊柱MRI", group: 4, category: "application",
+                      description: "脊柱MRI可清晰显示脊髓、椎间盘和神经根病变，是诊断椎间盘突出、脊髓损伤、脊柱肿瘤等的首选检查方法。" },
+                    { id: 17, name: "关节MRI", group: 4, category: "application",
+                      description: "关节MRI能清晰显示关节软骨、韧带、肌腱等软组织结构，广泛用于膝关节、肩关节等部位的病变诊断。" },
+                    { id: 18, name: "腹部MRI", group: 4, category: "application",
+                      description: "腹部MRI可评估肝脏、胰腺、肾脏等实质性脏器病变，无辐射，对病变定性诊断有重要价值。" },
+                    
+                    // 安全防护
+                    { id: 19, name: "磁场安全", group: 5, category: "safety",
+                      description: "MRI设备产生强磁场，需严格控制 ferromagnetic物质进入扫描室，避免物体被吸入磁体或患者体内金属异物移位造成伤害。" },
+                    { id: 20, name: "射频安全", group: 5, category: "safety",
+                      description: "射频脉冲可使人体组织产热，需控制射频能量沉积（SAR值），避免患者体温过高，特别是孕妇和婴幼儿。" },
+                    { id: 21, name: "梯度安全", group: 5, category: "safety",
+                      description: "梯度场快速切换可产生外周神经刺激和噪音，需采取措施减少患者不适，听力保护是常规防护措施之一。" }
+                ],
+                links: [
+                    // 基本原理相关链接
+                    { source: 1, target: 2, value: 5 },
+                    { source: 1, target: 3, value: 5 },
+                    { source: 1, target: 4, value: 5 },
+                    { source: 2, target: 4, value: 3 },
+                    { source: 3, target: 4, value: 3 },
+                    
+                    // 成像序列相关链接
+                    { source: 5, target: 2, value: 4 },
+                    { source: 6, target: 2, value: 4 },
+                    { source: 5, target: 1, value: 3 },
+                    { source: 6, target: 1, value: 3 },
+                    { source: 7, target: 6, value: 3 },
+                    { source: 8, target: 1, value: 3 },
+                    { source: 9, target: 5, value: 3 },
+                    
+                    // 设备结构相关链接
+                    { source: 10, target: 1, value: 5 },
+                    { source: 11, target: 1, value: 5 },
+                    { source: 12, target: 1, value: 5 },
+                    { source: 13, target: 1, value: 5 },
+                    { source: 14, target: 1, value: 5 },
+                    { source: 10, target: 11, value: 3 },
+                    { source: 11, target: 13, value: 3 },
+                    { source: 12, target: 13, value: 3 },
+                    { source: 13, target: 14, value: 3 },
+                    
+                    // 临床应用相关链接
+                    { source: 15, target: 5, value: 3 },
+                    { source: 15, target: 6, value: 3 },
+                    { source: 15, target: 8, value: 3 },
+                    { source: 16, target: 5, value: 3 },
+                    { source: 16, target: 6, value: 3 },
+                    { source: 17, target: 5, value: 3 },
+                    { source: 17, target: 9, value: 3 },
+                    { source: 18, target: 5, value: 3 },
+                    { source: 18, target: 6, value: 3 },
+                    { source: 18, target: 9, value: 3 },
+                    
+                    // 安全防护相关链接
+                    { source: 19, target: 10, value: 4 },
+                    { source: 20, target: 12, value: 4 },
+                    { source: 21, target: 11, value: 4 },
+                    { source: 19, target: 15, value: 2 },
+                    { source: 20, target: 15, value: 2 },
+                    
+                    // 跨类别链接
+                    { source: 10, target: 5, value: 2 },
+                    { source: 12, target: 5, value: 2 },
+                    { source: 1, target: 15, value: 2 }
+                ]
+            };
+            
+            // 创建SVG容器
+            const container = document.getElementById('graph-container');
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+            
+            const svg = d3.select("#graph-container")
+                .append("svg")
+                .attr("width", "100%")
+                .attr("height", "100%")
+                .attr("viewBox", [0, 0, width, height]);
+            
+            // 创建力导向图模拟
+            const simulation = d3.forceSimulation(graphData.nodes)
+                .force("link", d3.forceLink(graphData.links).id(d => d.id).distance(100))
+                .force("charge", d3.forceManyBody().strength(-300))
+                .force("center", d3.forceCenter(width / 2, height / 2))
+                .force("collision", d3.forceCollide().radius(50));
+            
+            // 绘制链接线
+            const link = svg.append("g")
+                .selectAll("line")
+                .data(graphData.links)
+                .enter().append("line")
+                .attr("stroke", "#999")
+                .attr("stroke-opacity", 0.6)
+                .attr("stroke-width", d => Math.sqrt(d.value));
+            
+            // 绘制节点
+            const node = svg.append("g")
+                .selectAll("g")
+                .data(graphData.nodes)
+                .enter().append("g")
+                .call(d3.drag()
+                    .on("start", dragstarted)
+                    .on("drag", dragged)
+                    .on("end", dragended));
+            
+            // 节点圆圈
+            node.append("circle")
+                .attr("r", 20)
+                .attr("fill", d => {
+                    const colors = {
+                        principle: "#7B61FF",   // 基本原理-紫色
+                        sequence: "#165DFF",    // 成像序列-蓝色
+                        equipment: "#00B42A",   // 设备结构-绿色
+                        application: "#FF7D00", // 临床应用-橙色
+                        safety: "#F53F3F"       // 安全防护-红色
+                    };
+                    return colors[d.category] || "#165DFF";
+                })
+                .attr("stroke", "#fff")
+                .attr("stroke-width", 2);
+            
+            // 节点文字
+            node.append("text")
+                .attr("dy", 40)
+                .attr("text-anchor", "middle")
+                .text(d => d.name)
+                .style("font-size", "12px")
+                .style("pointer-events", "none");
+            
+            // 节点点击事件
+            node.on("click", function(event, d) {
+                // 高亮选中节点
+                node.select("circle")
+                    .attr("stroke-width", n => n.id === d.id ? 4 : 2)
+                    .attr("r", n => n.id === d.id ? 22 : 20);
+                
+                // 更新详情面板
+                const detailsPanel = document.getElementById("node-details");
+                detailsPanel.innerHTML = `
+                    <h3 class="text-xl font-bold mb-4">${d.name}</h3>
+                    <div class="mb-4 inline-block px-3 py-1 rounded-full text-sm font-medium" style="background-color: ${getCategoryColor(d.category)}33; color: ${getCategoryColor(d.category)}">
+                        ${getCategoryName(d.category)}
+                    </div>
+                    <p class="mt-4 text-gray-700">${d.description}</p>
+                    <h4 class="mt-6 font-bold">相关概念:</h4>
+                    <ul class="mt-2 space-y-2">
+                        ${getRelatedConcepts(d.id).map(concept => `
+                            <li class="flex items-center">
+                                <i class="fa fa-angle-right text-primary mr-2"></i>
+                                <span class="hover:text-primary cursor-pointer related-concept" data-id="${concept.id}">${concept.name}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                `;
+                
+                // 相关概念点击事件
+                document.querySelectorAll('.related-concept').forEach(el => {
+                    el.addEventListener('click', function() {
+                        const conceptId = parseInt(this.getAttribute('data-id'));
+                        const conceptNode = graphData.nodes.find(n => n.id === conceptId);
+                        node.filter(n => n.id === conceptId).dispatch('click', {detail: conceptNode});
+                    });
+                });
+            });
+            
+            // 辅助函数：获取分类颜色
+            function getCategoryColor(category) {
+                const colors = {
+                    principle: "#7B61FF",
+                    sequence: "#165DFF",
+                    equipment: "#00B42A",
+                    application: "#FF7D00",
+                    safety: "#F53F3F"
+                };
+                return colors[category] || "#165DFF";
+            }
+            
+            // 辅助函数：获取分类名称
+            function getCategoryName(category) {
+                const names = {
+                    principle: "基本原理",
+                    sequence: "成像序列",
+                    equipment: "设备结构",
+                    application: "临床应用",
+                    safety: "安全防护"
+                };
+                return names[category] || category;
+            }
+            
+            // 辅助函数：获取相关概念
+            function getRelatedConcepts(nodeId) {
+                const relatedIds = new Set();
+                graphData.links.forEach(link => {
+                    if (link.source.id === nodeId) relatedIds.add(link.target.id);
+                    if (link.target.id === nodeId) relatedIds.add(link.source.id);
+                });
+                return graphData.nodes.filter(node => relatedIds.has(node.id));
+            }
+            
+            // 模拟更新
+            simulation.on("tick", () => {
+                link
+                    .attr("x1", d => d.source.x)
+                    .attr("y1", d => d.source.y)
+                    .attr("x2", d => d.target.x)
+                    .attr("y2", d => d.target.y);
+                
+                node.attr("transform", d => `translate(${d.x},${d.y})`);
+            });
+            
+            // 拖拽函数
+            function dragstarted(event, d) {
+                if (!event.active) simulation.alphaTarget(0.3).restart();
+                d.fx = d.x;
+                d.fy = d.y;
+            }
+            
+            function dragged(event, d) {
+                d.fx = event.x;
+                d.fy = event.y;
+            }
+            
+            function dragended(event, d) {
+                if (!event.active) simulation.alphaTarget(0);
+                d.fx = null;
+                d.fy = null;
+            }
+            
+            // 搜索功能
+            document.getElementById('search-btn').addEventListener('click', performSearch);
+            document.getElementById('search-node').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') performSearch();
+            });
+            
+            function performSearch() {
+                const searchTerm = document.getElementById('search-node').value.toLowerCase();
+                if (!searchTerm) return;
+                
+                const matchingNode = graphData.nodes.find(n => 
+                    n.name.toLowerCase().includes(searchTerm) || 
+                    n.description.toLowerCase().includes(searchTerm)
+                );
+                
+                if (matchingNode) {
+                    node.filter(n => n.id === matchingNode.id).dispatch('click', {detail: matchingNode});
+                    
+                    // 节点动画提示
+                    const nodeCircle = node.filter(n => n.id === matchingNode.id).select("circle");
+                    nodeCircle.transition()
+                        .duration(100)
+                        .attr("r", 28)
+                        .transition()
+                        .duration(100)
+                        .attr("r", 22);
+                } else {
+                    alert("未找到匹配的MRI概念");
+                }
+            }
+            
+            // 分类筛选
+            document.getElementById('category-filter').addEventListener('change', function() {
+                const selectedCategory = this.value;
+                
+                if (selectedCategory === 'all') {
+                    // 显示所有节点和链接
+                    node.style("opacity", 1);
+                    link.style("opacity", 0.6);
+                } else {
+                    // 隐藏非选中分类的节点
+                    node.style("opacity", d => d.category === selectedCategory ? 1 : 0.2);
+                    
+                    // 隐藏两端都不是选中分类的链接
+                    link.style("opacity", d => {
+                        return (d.source.category === selectedCategory || d.target.category === selectedCategory) ? 0.6 : 0;
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
